@@ -5,7 +5,7 @@
 var trigger = "quit";
 var answer = ""; 
 var cpuTalk = ["hi","yes","no","How are you?","lets play a game!","Rainy day today.","whats your name","I have a joke.  Want to hear it?","Do I have a cicada on my back?","How is your day going?","Want to listen to music","whats your favorite movie","S'up!","Hey","What\'s your favorite movie?","Looking forward to summer?","Are shadows made of matter?","What\'s your favorite book?","What\'s your favorite color?","What\'s your favorite ice cream flavor?","What\'s your favorite animal?","What\'s you favorite cereal?", "What grade are you in?"];
-var userTalk = ["favorite movie","grade", "how are you?"];
+var userTalk = ["favorite movie","grade", "how are you"];
 var promptInt = 0;
 var cpuSay = cpuTalk[promptInt];
 
@@ -45,7 +45,7 @@ function cpuThink(answer){
   else if (answer == "grade"){
     response = "I\'m not in school anymore.";
   }
-  else if (answer == "how are you?") {
+  else if (answer == "how are you") {
     response = queTal();
   }
   return response; 
