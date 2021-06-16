@@ -2,10 +2,12 @@
 // ; = "semicolon"
 
 /* Initializations */
+// for RPS
+var choice = 0,cpuScore = 0, myScore = 0;
 var trigger = "quit";
 var answer = ""; 
-var cpuTalk = ["hi","yes","no","How are you?","lets play a game!","Rainy day today.","whats your name","I have a joke.  Want to hear it?","Do I have a cicada on my back?","How is your day going?","Want to listen to music","whats your favorite movie","S'up!","Hey","What\'s your favorite movie?","Looking forward to summer?","Are shadows made of matter?","What\'s your favorite book?","What\'s your favorite color?","What\'s your favorite ice cream flavor?","What\'s your favorite animal?","What\'s you favorite cereal?", "What grade are you in?","Knock knock!","It\'s the end of the year!"];
-var userTalk = ["test knock","favorite movie","favorite color","grade", "how are you","mine is", "knock knock"];
+var cpuTalk = ["hi","yes","no","How are you?","lets play a game!","Rainy day today.","whats your name","I have a joke.  Want to hear it?","Do I have a cicada on my back?","How is your day going?","Want to listen to music","whats your favorite movie","S'up!","Hey","What\'s your favorite movie?","Looking forward to summer?","Are shadows made of matter?","What\'s your favorite book?","What\'s your favorite color?","What\'s your favorite ice cream flavor?","What\'s your favorite animal?","What\'s you favorite cereal?", "What grade are you in?","Knock knock!","It\'s the end of the year!","RPS"];
+var userTalk = ["test knock","favorite movie","favorite color","grade", "how are you","mine is", "knock knock","rps"];
 var promptInt = 0;
 var cpuSay = cpuTalk[promptInt];
 
@@ -13,6 +15,9 @@ while(answer != trigger){
   if(cpuSay=="Knock knock!") {
       answer = knockKnockCPU();
     }
+  else if (cpuSay =="RPS"){
+      answer = rps();
+  }
   else answer = prompt(cpuSay);
   let stringCheck = stringChecker(answer.toLowerCase());
   if (answer == trigger) {
@@ -63,6 +68,9 @@ function cpuThink(answerPart){
   else if (answerPart == "test knock") {
     response = "Knock knock!";
   }
+  else if (answerPart == "rps"){
+    response = rps();
+  }
   return response; 
 }
 
@@ -90,13 +98,13 @@ function knockKnockCPU(){
   answer = prompt("Knock knock!");
   answer = answer.toLowerCase();
   if (answer.substr(0,3) == "who") {
-    answer = prompt("Boo!");
+    answer = prompt("Tank!");
     answer = answer.toLowerCase();
-    if (answer.substr(0,3) == "boo") {
-      answer = prompt("Why are you crying?");
+    if (answer.substr(0,3) == "tan") {
+      answer = prompt("You're welcome!");
     }
     else {
-      answer = prompt("You were supposed to say \'Boo who?");
+      answer = prompt("You were supposed to say \'Tank who?");
     }
   }
   else {
@@ -104,3 +112,71 @@ function knockKnockCPU(){
   }
   return answer;
 } 
+
+/* Rock Paper Scissors */
+
+function rps(){
+  while(choice!="q"){
+    rpsFair();
+    alert("Score: Player Score: "+myScore+", Cpu Score: "+cpuScore);
+  }
+  return("Fun playing with you!");
+}
+
+function rpsFair(){
+  choice = prompt("Let's Play RPS! Enter r, p, or s. Enter q to stop");
+  cpu = Math.floor(Math.random()*3)+1;
+  if((choice!="r") && (choice!="p") && (choice!="s") && (choice!="q")){
+    alert("Enter r, p, or s, or q to end.");
+  }
+  if(choice=="r"){
+    choice = 1;
+  } else {
+    if(choice=="p"){
+      choice = 2;
+    } else {
+      if(choice=="s"){
+        choice = 3;
+      }
+    }
+  }
+  if(choice==cpu){
+    alert("Tie, try again!");
+  } else {
+    if((choice==1) && (cpu==2)){
+      // If Choice = Rock and Cpu = Paper
+      alert("I chose Paper, I Win!");
+      cpuScore++;
+    } else {
+      if((choice==3) && (cpu==1)){
+        // If Choice = Scissors and Cpu = Rock
+        alert("I chose Rock, I Win!");
+        cpuScore++;
+      } else {
+        if((choice==2) && (cpu==3)){
+          // If Choice = Paper and Cpu = Scissors
+          alert("I chose Scissors, I Win!");
+          cpuScore++;
+        } else {
+          if((choice==2) && (cpu==1)){
+            // If Choice = Paper and Cpu = Rock
+            alert("You chose Paper, You Win!");
+            myScore++;
+          } else {
+            if((choice==1) && (cpu==3)){
+              // If Choice = Rock and Cpu = Scissors
+              alert("You chose Rock, You Win!");
+              myScore++;
+            } else {
+              if((choice==3) && (cpu==2)){
+                // If Choice = Scissors and Cpu = Paper
+                alert("You chose Scissors, You Win!");
+                myScore++;
+              }
+            }
+          }
+        }
+      }
+    }
+  } 
+}
