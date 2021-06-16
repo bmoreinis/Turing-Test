@@ -4,13 +4,16 @@
 /* Initializations */
 var trigger = "quit";
 var answer = ""; 
-var cpuTalk = ["hi","yes","no","How are you?","lets play a game!","Rainy day today.","whats your name","I have a joke.  Want to hear it?","Do I have a cicada on my back?","How is your day going?","Want to listen to music","whats your favorite movie","S'up!","Hey","What\'s your favorite movie?","Looking forward to summer?","Are shadows made of matter?","What\'s your favorite book?","What\'s your favorite color?","What\'s your favorite ice cream flavor?","What\'s your favorite animal?","What\'s you favorite cereal?", "What grade are you in?"];
-var userTalk = ["favorite movie","favorite color","grade", "how are you","mine is"];
+var cpuTalk = ["hi","yes","no","How are you?","lets play a game!","Rainy day today.","whats your name","I have a joke.  Want to hear it?","Do I have a cicada on my back?","How is your day going?","Want to listen to music","whats your favorite movie","S'up!","Hey","What\'s your favorite movie?","Looking forward to summer?","Are shadows made of matter?","What\'s your favorite book?","What\'s your favorite color?","What\'s your favorite ice cream flavor?","What\'s your favorite animal?","What\'s you favorite cereal?", "What grade are you in?","Knock knock!","It\'s the end of the year!"];
+var userTalk = ["test knock","favorite movie","favorite color","grade", "how are you","mine is", "knock knock"];
 var promptInt = 0;
 var cpuSay = cpuTalk[promptInt];
 
 while(answer != trigger){
-  answer = prompt(cpuSay);
+  if(cpuSay=="Knock knock!") {
+      answer = knockKnockCPU();
+    }
+  else answer = prompt(cpuSay);
   let stringCheck = stringChecker(answer.toLowerCase());
   if (answer == trigger) {
     alert("Nice talkin' to ya!");
@@ -42,6 +45,9 @@ function cpuThink(answerPart){
   if (answerPart == "favorite movie") {
      response = "Avengers Endgame";
   }
+  else if (answerPart == "knock knock"){
+     response = knockKnock();
+  }
   else if (answerPart == "favorite color") {
      response = "purple";
   }
@@ -53,6 +59,9 @@ function cpuThink(answerPart){
   }
   else if (answerPart == "how are you") {
     response = queTal();
+  }
+  else if (answerPart == "test knock") {
+    response = "Knock knock!";
   }
   return response; 
 }
@@ -69,3 +78,29 @@ function lastPhrase(answer,whatThing){
   let response = answerArray.slice(cutHowMany);
   return response.join(" ")+" is one of my faves, too!";
 }
+
+function knockKnock(){
+  answer = prompt("Who's there?");
+  answer = prompt(answer + " who?");
+  answer = prompt(answer + "... that\'s so funny! ha ha ha!!!!");
+  return answer;
+}
+
+function knockKnockCPU(){
+  answer = prompt("Knock knock!");
+  answer = answer.toLowerCase();
+  if (answer.substr(0,3) == "who") {
+    answer = prompt("Boo!");
+    answer = answer.toLowerCase();
+    if (answer.substr(0,3) == "boo") {
+      answer = prompt("Why are you crying?");
+    }
+    else {
+      answer = prompt("You were supposed to say \'Boo who?");
+    }
+  }
+  else {
+    answer = prompt("You were supposed to say \'Who\'s there? \'!");
+  }
+  return answer;
+} 
